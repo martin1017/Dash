@@ -1,7 +1,7 @@
  AOS.init({
  	duration: 800,
  	easing: 'slide',
- 	once: false
+ 	once: true
  });
 
 jQuery(document).ready(function($) {
@@ -164,112 +164,40 @@ jQuery(document).ready(function($) {
 		    items: 1,
 		    loop: true,
 				stagePadding: 0,
-				autoplay: true,
-		    margin: 20,
-		    nav: true,
-		    dots: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
-		    responsive:{
-	        600:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 1
-	        },
-	        1000:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 2
-	        },
-	        1200:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 3
-	        }
-		    }
-			});
-		}
-
-
-
-		if ( $('.nonloop-block-14').length > 0 ) {
-			$('.nonloop-block-14').owlCarousel({
-		    center: false,
-		    items: 1,
-		    loop: true,
-				stagePadding: 0,
-				autoplay: true,
-		    margin: 20,
-		    nav: true,
-		    dots: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
-		    responsive:{
-	        600:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 1
-	        },
-	        1000:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 2
-	        }
-	        
-		    }
-			});
-		}
-
-		if ( $('.nonloop-block-15').length > 0 ) {
-			$('.nonloop-block-15').owlCarousel({
-		    center: false,
-		    items: 1,
-		    loop: true,
-				stagePadding: 0,
-				autoplay: true,
-		    margin: 20,
-		    nav: true,
-		    dots: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
-		    responsive:{
-	        600:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 1,
-	          nav: false,
-		    		dots: true
-	        },
-	        1000:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 2,
-	          nav: true,
-		    		dots: true
-	        },
-	        1200:{
-	        	margin: 20,
-	        	stagePadding: 0,
-	          items: 3,
-	          nav: true,
-		    		dots: true
-	        }
-		    }
-			});
-		}
-
-		if ( $('.slide-one-item').length > 0 ) {
-			$('.slide-one-item').owlCarousel({
-		    center: false,
-		    items: 1,
-		    loop: true,
-				stagePadding: 0,
 		    margin: 0,
 		    autoplay: true,
-		    pauseOnHover: false,
-		    animateOut: 'fadeOut',
-    		animateIn: 'fadeIn',
 		    nav: true,
-		    navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">']
-		  });
-	  }
+				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
+		    responsive:{
+	        600:{
+	        	margin: 0,
+	          items: 1
+	        },
+	        1000:{
+	        	margin: 0,
+	        	stagePadding: 0,
+	          items: 1
+	        },
+	        1200:{
+	        	margin: 0,
+	        	stagePadding: 0,
+	          items: 1
+	        }
+		    }
+			});
+		}
+
+		$('.slide-one-item').owlCarousel({
+	    center: false,
+	    items: 1,
+	    loop: true,
+			stagePadding: 0,
+	    margin: 0,
+	    autoplay: true,
+	    pauseOnHover: false,
+	    nav: true,
+	    navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">']
+	  });
 	};
 	siteCarousel();
 
@@ -287,16 +215,14 @@ jQuery(document).ready(function($) {
 
 	var siteCountDown = function() {
 
-		if ( $('#date-countdown').length > 0 ) {
-			$('#date-countdown').countdown('2020/10/10', function(event) {
-			  var $this = $(this).html(event.strftime(''
-			    + '<span class="countdown-block"><span class="label">%w</span> weeks </span>'
-			    + '<span class="countdown-block"><span class="label">%d</span> days </span>'
-			    + '<span class="countdown-block"><span class="label">%H</span> hr </span>'
-			    + '<span class="countdown-block"><span class="label">%M</span> min </span>'
-			    + '<span class="countdown-block"><span class="label">%S</span> sec</span>'));
-			});
-		}
+		$('#date-countdown').countdown('2020/10/10', function(event) {
+		  var $this = $(this).html(event.strftime(''
+		    + '<span class="countdown-block"><span class="label">%w</span> weeks </span>'
+		    + '<span class="countdown-block"><span class="label">%d</span> days </span>'
+		    + '<span class="countdown-block"><span class="label">%H</span> hr </span>'
+		    + '<span class="countdown-block"><span class="label">%M</span> min </span>'
+		    + '<span class="countdown-block"><span class="label">%S</span> sec</span>'));
+		});
 				
 	};
 	siteCountDown();
@@ -309,24 +235,5 @@ jQuery(document).ready(function($) {
 
 	};
 	siteDatePicker();
-
-
-	var windowScrolled = function() {
-
-
-		$(window).scroll(function() {
-
-			var $w = $(this), st = $w.scrollTop(), navbar = $('.js-site-navbar') ;
-
-			if ( st > 100 ) {
-				navbar.addClass('scrolled');
-			} else {
-				navbar.removeClass('scrolled');
-			}
-			
-		})
-
-	}
-	windowScrolled();
 
 });

@@ -1,9 +1,9 @@
-	/*
-  	Flaticon icon font: Flaticon
-  	Creation date: 10/01/2019 02:03
-  	*/
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 10/01/2019 02:03
+    */
 
-@font-face {
+    @font-face {
   font-family: "Flaticon";
   src: url("./Flaticon.eot");
   src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
@@ -21,23 +21,31 @@
   }
 }
 
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
-  font-family: Flaticon;
-        font-style: normal;
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
   font-weight: normal;
   font-variant: normal;
-  text-transform: none;
   line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
   -moz-osx-font-smoothing: grayscale;
-}
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
 
-.flaticon-route:before { content: "\f100"; }
+    .flaticon-route:before { content: "\f100"; }
 .flaticon-airplane:before { content: "\f101"; }
 .flaticon-hotel:before { content: "\f102"; }
 .flaticon-sailboat:before { content: "\f103"; }
 .flaticon-ship:before { content: "\f104"; }
 .flaticon-ski:before { content: "\f105"; }
+    
+    $font-Flaticon-route: "\f100";
+    $font-Flaticon-airplane: "\f101";
+    $font-Flaticon-hotel: "\f102";
+    $font-Flaticon-sailboat: "\f103";
+    $font-Flaticon-ship: "\f104";
+    $font-Flaticon-ski: "\f105";
