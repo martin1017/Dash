@@ -1145,7 +1145,9 @@ h1, h2, h3, h4, h5,
   font-size: 3rem; }
 
 .unit-4 h3 {
-  font-size: 20px; }
+	font-size: 26px;
+	font-weight: bold;
+}
 
 .h-entry img {
   margin-bottom: 30px; }
