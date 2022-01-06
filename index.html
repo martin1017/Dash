@@ -1,109 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <title>MPEG-DASH測試</title>
+  <head>
+    <title>銘傳大學 都市規劃與防災學系第16屆畢業成果展 &mdash; 續城鄉釋 </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://cdn.dashjs.org/v3.1.0/dash.all.min.js"></script>
-    <!--dash.all.min.js should be used in production over dash.all.debug.js
-        Debug files are not compressed or obfuscated making the file size much larger compared with dash.all.min.js-->
-    <!--<script src="../../dist/dash.all.min.js"></script>-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700"> 
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
 
-    <script class="code">
-        function init() {
-            var video,
-                player,
-                url = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd";
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 
-            video = document.querySelector("video");
-            player = dashjs.MediaPlayer().create();
-            player.initialize(video, url, true);
-            player.on(dashjs.MediaPlayer.events["PLAYBACK_ENDED"], function () {
-                clearInterval(eventPoller);
-                clearInterval(bitrateCalculator);
-            });
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
 
-            var eventPoller = setInterval(function () {
-                var streamInfo = player.getActiveStream().getStreamInfo();
-                var dashMetrics = player.getDashMetrics();
-                var dashAdapter = player.getDashAdapter();
-
-                if (dashMetrics && streamInfo) {
-                    const periodIdx = streamInfo.index;
-                    var repSwitch = dashMetrics.getCurrentRepresentationSwitch('video', true);
-                    var bufferLevel = dashMetrics.getCurrentBufferLevel('video', true);
-                    var bitrate = repSwitch ? Math.round(dashAdapter.getBandwidthForRepresentation(repSwitch.to, periodIdx) / 1000) : NaN;
-                    var adaptation = dashAdapter.getAdaptationForType(periodIdx, 'video', streamInfo)
-                    var frameRate = adaptation.Representation_asArray.find(function (rep) {
-                        return rep.id === repSwitch.to
-                    }).frameRate;
-                    document.getElementById('bufferLevel').innerText = bufferLevel + " secs";
-                    document.getElementById('framerate').innerText = frameRate + " fps";
-                    document.getElementById('reportedBitrate').innerText = bitrate + " Kbps";
-                }
-            }, 1000);
-
-            if (video.webkitVideoDecodedByteCount !== undefined) {
-                var lastDecodedByteCount = 0;
-                const bitrateInterval = 5;
-                var bitrateCalculator = setInterval(function () {
-                    var calculatedBitrate = (((video.webkitVideoDecodedByteCount - lastDecodedByteCount) / 1000) * 8) / bitrateInterval;
-                    document.getElementById('calculatedBitrate').innerText = Math.round(calculatedBitrate) + " Kbps";
-                    lastDecodedByteCount = video.webkitVideoDecodedByteCount;
-                }, bitrateInterval * 1000);
-            } else {
-                document.getElementById('chrome-only').style.display = "none";
-            }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
 
 
-        }
-    </script>
+    <link rel="stylesheet" href="css/aos.css">
 
-    <style>
-        video {
-            width: 640px;
-            height: 360px;
-        }
+    <link rel="stylesheet" href="css/style.css">
+    
+  </head>
+  <body>
+  
+  <div class="site-wrap">
 
-        #container {
-            display: inline-block;
-        }
-
-        #container > div {
-            display: inline-block;
-            float: left;
-            margin-right: 10px;
-        }
-
-    </style>
-</head>
-<body>
-<div id="container">
-    <div class="video-container">
-        <video data-dashjs-player autoplay controls="true">
-        </video>
-    </div>
-    <div>
-        <strong>Reported bitrate:</strong>
-        <span id="reportedBitrate"></span>
-        <br/>
-        <strong>Buffer level:</strong>
-        <span id="bufferLevel"></span>
-        <div id="chrome-only">
-            <strong>Calculated bitrate:</strong>
-            <span id="calculatedBitrate"></span>
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
         </div>
-        <strong>幀率:</strong>
-        <span id="framerate"></span>
+      </div>
+      <div class="site-mobile-menu-body"></div>
     </div>
-</div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        init();
-    });
-</script>
-<script src="../highlighter.js"></script>
-</body>
+    
+    <header class="site-navbar py-1" role="banner">
+
+      <div class="container">
+        <div class="row align-items-center">
+		<div class="col-6 col-xl-2">
+            <h1 class="mb-0"><a href="index.html" class="text-black h2 mb-0">續城鄉釋</a></h1>
+          </div>
+          <div class="col-10 col-md-8 d-none d-xl-block">
+            <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
+              <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+                <li class="active">
+                  <a href="index.html">首頁</a>
+                </li>
+				<li><a href="about.html">展覽主題</a></li>
+                <li class="has-children">
+                  <a href="destination.html">各組作品</a>
+                  <ul class="dropdown">
+                    <li><a href="#">第一組</a></li>
+                    <li><a href="#">第二組</a></li>
+                    <li><a href="#">第三組</a></li>
+                    <li><a href="#">第四組</a></li>
+					<li><a href="#">第五組</a></li>
+					<li><a href="#">第六組</a></li>
+					<li><a href="#">第七組</a></li>
+					<li><a href="8.html">第八組</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="col-6 col-xl-2 text-right">
+            <div class="d-none d-xl-inline-block">
+              <ul class="site-menu js-clone-nav ml-auto list-unstyled d-flex text-right mb-0" data-class="social">
+                <li>
+                  <a href="https://www.facebook.com/MCUbrio/" class="pl-3 pr-3 text-black"><span class="icon-facebook"></span></a>
+                </li>
+                <li>
+                  <a href="https://www.youtube.com/user/BRIOWB" class="pl-3 pr-3 text-black"><span class="icon-youtube-play"></span></a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+          </div>
+
+        </div>
+      </div>
+      
+    </header>
+
+  
+
+   
+
+    <div class="slide-one-item home-slider owl-carousel">
+      
+      <div class="site-blocks-cover overlay" style="background-image: url(images/0005.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center text-center">
+
+            <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+              
+
+			  <h1 class="text-white font-weight-light">第五組標題</h1>
+              <p><a href="#" class="btn btn-primary py-3 px-5 text-white">查看更多</a></p>
+
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      <div class="site-blocks-cover overlay" style="background-image: url(images/0006.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center text-center">
+
+            <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+              <h1 class="text-white font-weight-light">第六組標題</h1>
+              <p><a href="#" class="btn btn-primary py-3 px-5 text-white">查看更多</a></p>
+            </div>
+          </div>
+        </div>
+      </div>  
+		
+      <div class="site-blocks-cover overlay" style="background-image: url(images/0008.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center text-center">
+
+            <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+              <h1 class="text-white font-weight-light">第八組標題</h1>
+              <p><a href="#" class="btn btn-primary py-3 px-5 text-white">查看更多</a></p>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+    </div>
+
+
+    <div class="site-section">
+      <div class="container">
+		   <div class="row justify-content-center mb-5">
+          <div class="col-md-7">
+            <h2 class="font-weight-light text-black text-center">展覽主題</h2>
+          </div>
+        </div>
+        <div class="row align-items-stretch">
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="unit-4 d-flex">
+              <div class="unit-4-icon mr-4">
+				  <span class="flaticon-new-file"></span></div>
+              <div>
+                <h3>關於</h3>
+                <p>銘傳大學布利歐管樂團成立於民國91年，而充滿特色的團名取自於Brio的諧音。在音樂術語中ConBrio 是指有精神、有活力的意思，希望我們團員們充滿熱情與活力共同熱愛音樂。</p>
+				<p>近年更以管樂的專長於社內持續推行帶動中小學活動，長期與中埔國小管樂團合作，團員擔任分部教學老師教導小朋友樂理基礎，在與小朋友互動中達到教學相長的效果，發揚服務學習的精神。</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="unit-4 d-flex">
+              <div class="unit-4-icon mr-4">
+				  <span class="flaticon-new-file"></span></div>
+              <div>
+                <h3>校內校外</h3>
+                <p>我們布利歐管樂團成立至108年已邁入第18個年頭，曾參與多次校內大型演出或校外受邀表演，並每學年定期舉辦校內成果發表音樂會，更積極參加各式文藝活動觀摩學習。與鄰近友校樂團也維持良好的互動交流，每年一同舉辦五校聯合賽前公演等交流活動。
+				</p>
+				<p>為了拓展社員的國際視野，參與每年於12月左右嘉義市所舉辦的嘉義管樂節觀摩活動，一年一度的管樂節邀請國內外實力堅強的管樂團蒞臨演出，讓團員們感受國際級的震撼以及有別於台灣的演出方式</p>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="unit-4 d-flex">
+              <div class="unit-4-icon mr-4">
+				  <span class="flaticon-new-file"></span></div>
+              <div>
+                <h3>未來展望</h3>
+                <p>我們的團員們來自不同的科系，曾經有著不一樣的故事，從著對音樂的熱情交會在布利歐的大家庭中，有著共同的熱情和歸屬，用活力與精神演奏出一段屬於布利歐獨一無二的動人樂章。</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+		  
+	  <div class="row align-items-center justify-content-center text-center">
+
+         <p><a href="#" class="btn btn-primary py-3 px-5 text-white">查看更多</a></p>
+      </div>
+    </div>
+  
+
+
+
+
+    
+    <div class="site-section block-13 bg-light">
+  
+
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7">
+            <h2 class="font-weight-light text-black text-center">老師介紹</h2>
+          </div>
+        </div>
+
+        <div class="nonloop-block-13 owl-carousel">
+
+          <div class="item">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 mb-5">
+                  <img src="images/社長.jpg" alt="Image" class="img-md-fluid">
+                </div>
+                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
+				<p class="text-black lead">
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;總理社團一切事宜。<br>
+                <span class="flaticon-favorites-button"></span>&nbsp;&nbsp;召開各類會議並擔任主席。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;盡力爭取社團應有之權利。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;傳達學校與社團之間事務。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;幹部間有爭執社長須居中協調。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;精通學校各項社團有關之程序。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;負責社團對外連絡等事宜。<br>
+                </p>
+                  <p class="">&mdash; <a>許竹儀</a>, <a href="#">108社長</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 mb-5">
+                  <img src="images/副社長.jpg" alt="Image" class="img-md-fluid">
+                </div>
+                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
+				<p class="text-black lead">
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;協助社長處理相關事務。<br>
+                <span class="flaticon-favorites-button"></span>&nbsp;&nbsp;各類會議之召集聯絡。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;負責每次團練點名。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;聯繫社員 ( 總分部長 )。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;掌控團練準備工作。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;緊急狀況代理社長。<br>
+				<span class="flaticon-favorites-button"></span>&nbsp;&nbsp;編輯校友資料。<br>
+                </p>
+                  <p class="">&mdash; <a>陳伊寧</a>, <a href="#">108副社長</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+		</div>
+      </div>
+    </div>
+
+
+    <div class="site-section">
+      
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center">
+            <h2 class="font-weight-light text-black">各組作品</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+            <a href="#" class="unit-1 text-center">
+              <img src="images/興南團2.jpg" alt="Image" class="img-fluid">
+              <div class="unit-1-text">
+                <strong class="text-primary mb-2 d-block">108上</strong>
+                <h3 class="unit-1-heading">興南國中管樂營</h3>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+            <a href="#" class="unit-1 text-center">
+              <img src="images/中埔團2.jpg" alt="Image" class="img-fluid">
+              <div class="unit-1-text">
+                <strong class="text-primary mb-2 d-block">108上</strong>
+                <h3 class="unit-1-heading">中埔國小管樂營</h3>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+            <a href="#" class="unit-1 text-center">
+              <img src="images/畢音團2.jpg" alt="Image" class="img-fluid">
+              <div class="unit-1-text">
+                <strong class="text-primary mb-2 d-block">107下</strong>
+                <h3 class="unit-1-heading">期末畢業音樂會 &mdash; 時光嘉年華</h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+            <a href="#" class="unit-1 text-center">
+              <img src="images/其中賣藝2.jpg" alt="Image" class="img-fluid">
+              <div class="unit-1-text">
+                <strong class="text-primary mb-2 d-block">107下</strong>
+                <h3 class="unit-1-heading">期中賣藝</h3>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+            <a href="#" class="unit-1 text-center">
+              <img src="images/嘉管團2.jpg" alt="Image" class="img-fluid">
+              <div class="unit-1-text">
+                <strong class="text-primary mb-2 d-block">107上</strong>
+                <h3 class="unit-1-heading">嘉義國際管樂節</h3>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+            <a href="#" class="unit-1 text-center">
+              <img src="images/樂器維修2.jpg" alt="Image" class="img-fluid">
+              <div class="unit-1-text">
+                <strong class="text-primary mb-2 d-block">107上</strong>
+                <h3 class="unit-1-heading">樂器維修</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- <div class="site-section bg-light">
+      
+    </div> -->
+
+
+    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url(images/畢音.jpg); background-attachment: fixed;">
+      <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+
+          <div class="col-md-7" data-aos="fade-up" data-aos-delay="400">
+            <a href="https://www.youtube.com/watch?v=xhXj8qM-V50" class="play-single-big mb-4 d-inline-block popup-vimeo"><span class="icon-play"></span></a>
+            <h2 class="text-white font-weight-light mb-5 h1">概念影片</h2>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="site-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center">
+            <h2 class="font-weight-light text-black">認識樂器</h2>
+            <p class="color-black-opacity-5">Instrument Knowledge </p>
+          </div>
+        </div>
+        <div class="row mb-3 align-items-stretch">
+          <div class="col-md-6 col-lg-6 mb-4 mb-lg-4">
+            <div class="h-entry">
+              <img src="images/brass.jpg" alt="Image" class="img-fluid">
+              <h2 class="font-size-regular"><a href="#">銅管樂器</a></h2>
+              <div class="meta mb-4">Brass</div>
+              <p>銅管樂器是一種利用氣流振動嘴唇發音，藉由吹嘴協助，導入樂器共鳴發聲的樂器。也被稱為「labrosones」，字面的意思就是「嘴唇振動的樂器」。銅管樂器改變音高有兩種方式：一、壓放按鍵或推拉滑管，來改變管身的長度，二、吹奏者改變嘴唇振動的發聲頻率。</p>
+            </div> 
+          </div>
+          <div class="col-md-6 col-lg-6 mb-4 mb-lg-4">
+            <div class="h-entry">
+              <img src="images/woodwind.jpg" alt="Image" class="img-fluid">
+              <h2 class="font-size-regular"><a href="#">木管樂器</a></h2>
+              <div class="meta mb-4">WoodWind</div>
+              <p>木管樂器大多數由堅實耐用的木材製作。木管樂器的歷史很久遠，大致上古代人類在動物的腿骨上打洞製造出來的原始笛子就是木管樂器的祖先。現代木管樂器是從各國民間音樂中使用的類似蘆笛、笛和簫之類的樂器發展而來。
+              木管樂器在管身上開有音孔，通過堵住和放開特定的音孔改變管身的有效長度來產生不同的音高。</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            <a href="#" class="btn btn-outline-primary border-2 py-3 px-5">查看更多</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">關於我們</h3>
+              <p>桃園銘傳大學布利歐管樂團，取自Brio的諧音在音樂術語中─Con Brio，是指有精神、有活力的意思！創團多年以來各屆團員以喜愛音樂的熱誠、用跳躍的音符繫住每個團員的心，彼此互相學習成長，培養出深厚的情感每年固定在校內舉辦音樂會以及成果發表會並與鄰近友校聯合演出，參與社區服務以及帶動中小學音樂活動等等，皆深獲觀眾的好評歡迎喜歡管樂的你/妳們一同加入布利歐大家庭！</p>
+            </div>
+
+            
+            
+          </div>
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">網站導航</h3>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="#">首頁</a></li>
+                  <li><a href="#">展覽主題</a></li>
+                </ul>
+			</div>
+            </div>
+
+            
+
+          </div>
+
+          <div class="col-lg-4 mb-5 mb-lg-0">
+           
+
+            <div class="mb-5">
+              <h3 class="footer-heading mb-2">聯絡我們</h3>
+              <p>有什麼問題都可以聯絡我們</p>
+
+              <form action="#" method="post">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Question" aria-label="Enter Email" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary text-white" type="button" id="button-addon2">傳送</button>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+          
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <div class="mb-5">
+              <a href="https://www.facebook.com/MCUbrio/" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+              <a href="https://www.youtube.com/user/BRIOWB" class="pl-3 pr-3"><span class="icon-youtube-play"></span></a>
+            </div>
+          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 
+          </div>
+			
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/bootstrap-datepicker.min.js"></script>
+  <script src="js/aos.js"></script>
+
+  <script src="js/main.js"></script>
+    
+  </body>
 </html>
-
-
